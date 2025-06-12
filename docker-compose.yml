@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./tradeMapBack/tradeMapClone-main
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - trademap-network
+
+  frontend:
+    build:
+      context: ./TradeMap
+      dockerfile: Dockerfile
+    volumes:
+      - ./TradeMap/app/build/outputs/apk:/app/build/outputs/apk
+    networks:
+      - trademap-network
+
+networks:
+  trademap-network:
+    driver: bridge 
